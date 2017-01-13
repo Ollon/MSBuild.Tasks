@@ -1,0 +1,58 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26020.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{14EE60BB-3A7B-4DE0-8DC8-61E22AE9EA04}"
+	ProjectSection(SolutionItems) = preProject
+		Build\Build.proj = Build\Build.proj
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Dependencies", "Dependencies", "{5C1EC2BF-FFFE-4CCA-9B1B-59054B76BC79}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{4735C055-A4F9-42CE-BD42-4DAD373D056E}"
+	ProjectSection(SolutionItems) = preProject
+		Build\Targets\ProducesNoOutput.Imports.targets = Build\Targets\ProducesNoOutput.Imports.targets
+		Build\Targets\ProducesNoOutput.Settings.props = Build\Targets\ProducesNoOutput.Settings.props
+		Build\Targets\VSX.AssemblyInfo.targets = Build\Targets\VSX.AssemblyInfo.targets
+		Build\Targets\VSX.Imports.targets = Build\Targets\VSX.Imports.targets
+		Build\Targets\VSX.InternalsVisibleTo.targets = Build\Targets\VSX.InternalsVisibleTo.targets
+		Build\Targets\VSX.References.targets = Build\Targets\VSX.References.targets
+		Build\Targets\VSX.Settings.props = Build\Targets\VSX.Settings.props
+		Build\Targets\VSX.VsSDK.targets = Build\Targets\VSX.VsSDK.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{58F812EF-9174-4FB9-A771-DE06727206E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGet", "NuGet", "{D174011B-8FF7-41F8-A2F4-DB61B0C302C6}"
+	ProjectSection(SolutionItems) = preProject
+		Src\NuGet\NuGet.Proj = Src\NuGet\NuGet.Proj
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateImageMonikersTask", "Src\GenerateImageMonikersTask\GenerateImageMonikersTask.csproj", "{A96DFDB2-4B4D-4E26-BBDC-CAFEFBDAFA8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamlRuleToCode", "Src\XamlRuleToCode\XamlRuleToCode.csproj", "{A17FEF0B-53C2-48C4-88AC-C8742626B647}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A96DFDB2-4B4D-4E26-BBDC-CAFEFBDAFA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A96DFDB2-4B4D-4E26-BBDC-CAFEFBDAFA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A96DFDB2-4B4D-4E26-BBDC-CAFEFBDAFA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A96DFDB2-4B4D-4E26-BBDC-CAFEFBDAFA8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A17FEF0B-53C2-48C4-88AC-C8742626B647}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A17FEF0B-53C2-48C4-88AC-C8742626B647}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A17FEF0B-53C2-48C4-88AC-C8742626B647}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A17FEF0B-53C2-48C4-88AC-C8742626B647}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4735C055-A4F9-42CE-BD42-4DAD373D056E} = {14EE60BB-3A7B-4DE0-8DC8-61E22AE9EA04}
+		{58F812EF-9174-4FB9-A771-DE06727206E4} = {14EE60BB-3A7B-4DE0-8DC8-61E22AE9EA04}
+		{D174011B-8FF7-41F8-A2F4-DB61B0C302C6} = {14EE60BB-3A7B-4DE0-8DC8-61E22AE9EA04}
+	EndGlobalSection
+EndGlobal

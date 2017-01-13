@@ -1,0 +1,74 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(DebugVsixProject)'=='true'">
+      <PropertyGroup>
+        <StartAction>Program</StartAction>
+        <StartProgram>C:\Program Files %28x86%29\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\devenv.exe</StartProgram>
+        <StartArguments>/rootsuffix Exp</StartArguments>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+  <PropertyGroup>
+    <GetVsixSourceItemsDependsOn>$(GetVsixSourceItemsDependsOn);IncludeVsixLocalOnlyItems</GetVsixSourceItemsDependsOn>
+  </PropertyGroup>
+
+  <Target Name="IncludeVsixLocalOnlyItems">
+    <!-- This is shamelessly ripped from Microsoft.VsSDK.targets -->
+    <ItemGroup>
+      <VSIXSourceItemLocalOnly Include="@(Content)" Condition="'%(Content.IncludeInVSIXLocalOnly)'=='true' AND '%(Content.VSIXSubPath)'==''">
+        <!-- Sets VSIXSubPath for content items that are nonlinked files -->
+        <VSIXSubPath Condition="'%(Content.Link)'==''">%(Content.RelativeDir)</VSIXSubPath>
+        <!-- Sets VSIXSubPath for content items that are linked files -->
+        <VSIXSubPath Condition="'%(Content.Link)'!=''">$([System.IO.Path]::GetDirectoryName(%(Content.Link)))</VSIXSubPath>
+      </VSIXSourceItemLocalOnly>
+
+      <VSIXSourceItemLocalOnly Include="@(Content)" Condition="'%(Content.IncludeInVSIXLocalOnly)'=='true' AND '%(Content.VSIXSubPath)'!=''" />
+    </ItemGroup>
+  </Target>
+
+  <PropertyGroup>
+    <GetVsixSourceItemsDependsOn>$(GetVsixSourceItemsDependsOn);IncludeNuGetResolvedAssets</GetVsixSourceItemsDependsOn>
+  </PropertyGroup>
+
+  <Target Name="IncludeNuGetResolvedAssets" DependsOnTargets="ResolveNuGetPackageAssets" Condition="'@(NuGetPackageToIncludeInVsix)' != ''">
+    <ItemGroup>
+      <_ReferenceCopyLocalPathsWithPotentialInclusions Include="@(ReferenceCopyLocalPaths)">
+        <NuGetPackageToIncludeInVsix>%(NuGetPackageToIncludeInVsix.Identity)</NuGetPackageToIncludeInVsix>
+      </_ReferenceCopyLocalPathsWithPotentialInclusions>
+
+      <VSIXCopyLocalReferenceSourceItem Include="@(_ReferenceCopyLocalPathsWithPotentialInclusions)"
+        Condition="'%(_ReferenceCopyLocalPathsWithPotentialInclusions.NuGetPackageId)' == '%(_ReferenceCopyLocalPathsWithPotentialInclusions.NuGetPackageToIncludeInVsix)' and
+                   '%(_ReferenceCopyLocalPathsWithPotentialInclusions.Extension)' != '.pdb'">
+        <ForceIncludeInVsix>true</ForceIncludeInVsix>
+        <Private>true</Private>
+      </VSIXCopyLocalReferenceSourceItem>
+    </ItemGroup>
+  </Target>
+
+  <ItemDefinitionGroup>
+    <NuGetPackageToIncludeInVsix>
+      <Visible>false</Visible>
+    </NuGetPackageToIncludeInVsix>
+  </ItemDefinitionGroup>
+
+  <ItemDefinitionGroup>
+    <Reference>
+      <Private>true</Private>
+      <ForceIncludeInVsix>true</ForceIncludeInVsix>
+    </Reference>
+    <ProjectReference>
+      <Private>true</Private>
+      <ForceIncludeInVsix>true</ForceIncludeInVsix>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+
+
+  <Import Project="$(VSToolsPath)\VSSDK\Microsoft.VsSDK.targets" Condition="'$(VSToolsPath)' != ''" />
+  
+</Project>

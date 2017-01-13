@@ -1,0 +1,145 @@
+﻿//-----------------------------------------------------------------------
+// <copyright file="Keywords.cs" company="Ollon, LLC">
+//     Copyright (c) 2017 Ollon, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+
+namespace MSBuild.Tasks.Tasks.Generator
+{
+    internal static class Keywords
+    {
+        public static readonly SyntaxToken Bool = SyntaxFactory.Token((SyntaxKind)8304);
+        public static readonly SyntaxToken Byte = SyntaxFactory.Token((SyntaxKind)8305);
+        public static readonly SyntaxToken SByte = SyntaxFactory.Token((SyntaxKind)8306);
+        public static readonly SyntaxToken Short = SyntaxFactory.Token((SyntaxKind)8307);
+        public static readonly SyntaxToken UShort = SyntaxFactory.Token((SyntaxKind)8308);
+        public static readonly SyntaxToken Int = SyntaxFactory.Token((SyntaxKind)8309);
+        public static readonly SyntaxToken UInt = SyntaxFactory.Token((SyntaxKind)8310);
+        public static readonly SyntaxToken Long = SyntaxFactory.Token((SyntaxKind)8311);
+        public static readonly SyntaxToken ULong = SyntaxFactory.Token((SyntaxKind)8312);
+        public static readonly SyntaxToken Double = SyntaxFactory.Token((SyntaxKind)8313);
+        public static readonly SyntaxToken Float = SyntaxFactory.Token((SyntaxKind)8314);
+        public static readonly SyntaxToken Decimal = SyntaxFactory.Token((SyntaxKind)8315);
+        public static readonly SyntaxToken String = SyntaxFactory.Token((SyntaxKind)8316);
+        public static readonly SyntaxToken Char = SyntaxFactory.Token((SyntaxKind)8317);
+        public static readonly SyntaxToken Void = SyntaxFactory.Token((SyntaxKind)8318);
+        public static readonly SyntaxToken Object = SyntaxFactory.Token((SyntaxKind)8319);
+        public static readonly SyntaxToken TypeOf = SyntaxFactory.Token((SyntaxKind)8320);
+        public static readonly SyntaxToken SizeOf = SyntaxFactory.Token((SyntaxKind)8321);
+        public static readonly SyntaxToken Null = SyntaxFactory.Token((SyntaxKind)8322);
+        public static readonly SyntaxToken True = SyntaxFactory.Token((SyntaxKind)8323);
+        public static readonly SyntaxToken False = SyntaxFactory.Token((SyntaxKind)8324);
+        public static readonly SyntaxToken If = SyntaxFactory.Token((SyntaxKind)8325);
+        public static readonly SyntaxToken Else = SyntaxFactory.Token((SyntaxKind)8326);
+        public static readonly SyntaxToken While = SyntaxFactory.Token((SyntaxKind)8327);
+        public static readonly SyntaxToken For = SyntaxFactory.Token((SyntaxKind)8328);
+        public static readonly SyntaxToken ForEach = SyntaxFactory.Token((SyntaxKind)8329);
+        public static readonly SyntaxToken Do = SyntaxFactory.Token((SyntaxKind)8330);
+        public static readonly SyntaxToken Switch = SyntaxFactory.Token((SyntaxKind)8331);
+        public static readonly SyntaxToken Case = SyntaxFactory.Token((SyntaxKind)8332);
+        public static readonly SyntaxToken Default = SyntaxFactory.Token((SyntaxKind)8333);
+        public static readonly SyntaxToken Try = SyntaxFactory.Token((SyntaxKind)8334);
+        public static readonly SyntaxToken Catch = SyntaxFactory.Token((SyntaxKind)8335);
+        public static readonly SyntaxToken Finally = SyntaxFactory.Token((SyntaxKind)8336);
+        public static readonly SyntaxToken Lock = SyntaxFactory.Token((SyntaxKind)8337);
+        public static readonly SyntaxToken Goto = SyntaxFactory.Token((SyntaxKind)8338);
+        public static readonly SyntaxToken Break = SyntaxFactory.Token((SyntaxKind)8339);
+        public static readonly SyntaxToken Continue = SyntaxFactory.Token((SyntaxKind)8340);
+        public static readonly SyntaxToken Return = SyntaxFactory.Token((SyntaxKind)8341);
+        public static readonly SyntaxToken Throw = SyntaxFactory.Token((SyntaxKind)8342);
+        public static readonly SyntaxToken Public = SyntaxFactory.Token((SyntaxKind)8343);
+        public static readonly SyntaxToken Private = SyntaxFactory.Token((SyntaxKind)8344);
+        public static readonly SyntaxToken Internal = SyntaxFactory.Token((SyntaxKind)8345);
+        public static readonly SyntaxToken Protected = SyntaxFactory.Token((SyntaxKind)8346);
+        public static readonly SyntaxToken Static = SyntaxFactory.Token((SyntaxKind)8347);
+        public static readonly SyntaxToken ReadOnly = SyntaxFactory.Token((SyntaxKind)8348);
+        public static readonly SyntaxToken Sealed = SyntaxFactory.Token((SyntaxKind)8349);
+        public static readonly SyntaxToken Const = SyntaxFactory.Token((SyntaxKind)8350);
+        public static readonly SyntaxToken Fixed = SyntaxFactory.Token((SyntaxKind)8351);
+        public static readonly SyntaxToken StackAlloc = SyntaxFactory.Token((SyntaxKind)8352);
+        public static readonly SyntaxToken Volatile = SyntaxFactory.Token((SyntaxKind)8353);
+        public static readonly SyntaxToken New = SyntaxFactory.Token((SyntaxKind)8354);
+        public static readonly SyntaxToken Override = SyntaxFactory.Token((SyntaxKind)8355);
+        public static readonly SyntaxToken Abstract = SyntaxFactory.Token((SyntaxKind)8356);
+        public static readonly SyntaxToken Virtual = SyntaxFactory.Token((SyntaxKind)8357);
+        public static readonly SyntaxToken Event = SyntaxFactory.Token((SyntaxKind)8358);
+        public static readonly SyntaxToken Extern = SyntaxFactory.Token((SyntaxKind)8359);
+        public static readonly SyntaxToken Ref = SyntaxFactory.Token((SyntaxKind)8360);
+        public static readonly SyntaxToken Out = SyntaxFactory.Token((SyntaxKind)8361);
+        public static readonly SyntaxToken In = SyntaxFactory.Token((SyntaxKind)8362);
+        public static readonly SyntaxToken Is = SyntaxFactory.Token((SyntaxKind)8363);
+        public static readonly SyntaxToken As = SyntaxFactory.Token((SyntaxKind)8364);
+        public static readonly SyntaxToken Params = SyntaxFactory.Token((SyntaxKind)8365);
+        public static readonly SyntaxToken ArgList = SyntaxFactory.Token((SyntaxKind)8366);
+        public static readonly SyntaxToken MakeRef = SyntaxFactory.Token((SyntaxKind)8367);
+        public static readonly SyntaxToken RefType = SyntaxFactory.Token((SyntaxKind)8368);
+        public static readonly SyntaxToken RefValue = SyntaxFactory.Token((SyntaxKind)8369);
+        public static readonly SyntaxToken This = SyntaxFactory.Token((SyntaxKind)8370);
+        public static readonly SyntaxToken Base = SyntaxFactory.Token((SyntaxKind)8371);
+        public static readonly SyntaxToken Namespace = SyntaxFactory.Token((SyntaxKind)8372);
+        public static readonly SyntaxToken Using = SyntaxFactory.Token((SyntaxKind)8373);
+        public static readonly SyntaxToken Class = SyntaxFactory.Token((SyntaxKind)8374);
+        public static readonly SyntaxToken Struct = SyntaxFactory.Token((SyntaxKind)8375);
+        public static readonly SyntaxToken Interface = SyntaxFactory.Token((SyntaxKind)8376);
+        public static readonly SyntaxToken Enum = SyntaxFactory.Token((SyntaxKind)8377);
+        public static readonly SyntaxToken Delegate = SyntaxFactory.Token((SyntaxKind)8378);
+        public static readonly SyntaxToken Checked = SyntaxFactory.Token((SyntaxKind)8379);
+        public static readonly SyntaxToken Unchecked = SyntaxFactory.Token((SyntaxKind)8380);
+        public static readonly SyntaxToken Unsafe = SyntaxFactory.Token((SyntaxKind)8381);
+        public static readonly SyntaxToken Operator = SyntaxFactory.Token((SyntaxKind)8382);
+        public static readonly SyntaxToken Explicit = SyntaxFactory.Token((SyntaxKind)8383);
+        public static readonly SyntaxToken Implicit = SyntaxFactory.Token((SyntaxKind)8384);
+        public static readonly SyntaxToken Yield = SyntaxFactory.Token((SyntaxKind)8405);
+        public static readonly SyntaxToken Partial = SyntaxFactory.Token((SyntaxKind)8406);
+        public static readonly SyntaxToken Alias = SyntaxFactory.Token((SyntaxKind)8407);
+        public static readonly SyntaxToken Global = SyntaxFactory.Token((SyntaxKind)8408);
+        public static readonly SyntaxToken Assembly = SyntaxFactory.Token((SyntaxKind)8409);
+        public static readonly SyntaxToken Module = SyntaxFactory.Token((SyntaxKind)8410);
+        public static readonly SyntaxToken Type = SyntaxFactory.Token((SyntaxKind)8411);
+        public static readonly SyntaxToken Field = SyntaxFactory.Token((SyntaxKind)8412);
+        public static readonly SyntaxToken Method = SyntaxFactory.Token((SyntaxKind)8413);
+        public static readonly SyntaxToken Param = SyntaxFactory.Token((SyntaxKind)8414);
+        public static readonly SyntaxToken Property = SyntaxFactory.Token((SyntaxKind)8415);
+        public static readonly SyntaxToken TypeVar = SyntaxFactory.Token((SyntaxKind)8416);
+        public static readonly SyntaxToken Get = SyntaxFactory.Token((SyntaxKind)8417);
+        public static readonly SyntaxToken Set = SyntaxFactory.Token((SyntaxKind)8418);
+        public static readonly SyntaxToken Add = SyntaxFactory.Token((SyntaxKind)8419);
+        public static readonly SyntaxToken Remove = SyntaxFactory.Token((SyntaxKind)8420);
+        public static readonly SyntaxToken Where = SyntaxFactory.Token((SyntaxKind)8421);
+        public static readonly SyntaxToken From = SyntaxFactory.Token((SyntaxKind)8422);
+        public static readonly SyntaxToken Group = SyntaxFactory.Token((SyntaxKind)8423);
+        public static readonly SyntaxToken Join = SyntaxFactory.Token((SyntaxKind)8424);
+        public static readonly SyntaxToken Into = SyntaxFactory.Token((SyntaxKind)8425);
+        public static readonly SyntaxToken Let = SyntaxFactory.Token((SyntaxKind)8426);
+        public static readonly SyntaxToken By = SyntaxFactory.Token((SyntaxKind)8427);
+        public static readonly SyntaxToken Select = SyntaxFactory.Token((SyntaxKind)8428);
+        public static readonly SyntaxToken OrderBy = SyntaxFactory.Token((SyntaxKind)8429);
+        public static readonly SyntaxToken On = SyntaxFactory.Token((SyntaxKind)8430);
+        public static readonly SyntaxToken EqualsKeyword = SyntaxFactory.Token((SyntaxKind)8431);
+        public static readonly SyntaxToken Ascending = SyntaxFactory.Token((SyntaxKind)8432);
+        public static readonly SyntaxToken Descending = SyntaxFactory.Token((SyntaxKind)8433);
+        public static readonly SyntaxToken NameOf = SyntaxFactory.Token((SyntaxKind)8434);
+        public static readonly SyntaxToken Async = SyntaxFactory.Token((SyntaxKind)8435);
+        public static readonly SyntaxToken Await = SyntaxFactory.Token((SyntaxKind)8436);
+        public static readonly SyntaxToken When = SyntaxFactory.Token((SyntaxKind)8437);
+        public static readonly SyntaxToken Elif = SyntaxFactory.Token((SyntaxKind)8467);
+        public static readonly SyntaxToken EndIf = SyntaxFactory.Token((SyntaxKind)8468);
+        public static readonly SyntaxToken Region = SyntaxFactory.Token((SyntaxKind)8469);
+        public static readonly SyntaxToken EndRegion = SyntaxFactory.Token((SyntaxKind)8470);
+        public static readonly SyntaxToken Define = SyntaxFactory.Token((SyntaxKind)8471);
+        public static readonly SyntaxToken Undef = SyntaxFactory.Token((SyntaxKind)8472);
+        public static readonly SyntaxToken Warning = SyntaxFactory.Token((SyntaxKind)8473);
+        public static readonly SyntaxToken Error = SyntaxFactory.Token((SyntaxKind)8474);
+        public static readonly SyntaxToken Line = SyntaxFactory.Token((SyntaxKind)8475);
+        public static readonly SyntaxToken Pragma = SyntaxFactory.Token((SyntaxKind)8476);
+        public static readonly SyntaxToken Hidden = SyntaxFactory.Token((SyntaxKind)8477);
+        public static readonly SyntaxToken Checksum = SyntaxFactory.Token((SyntaxKind)8478);
+        public static readonly SyntaxToken Disable = SyntaxFactory.Token((SyntaxKind)8479);
+        public static readonly SyntaxToken Restore = SyntaxFactory.Token((SyntaxKind)8480);
+        public static readonly SyntaxToken Reference = SyntaxFactory.Token((SyntaxKind)8481);
+        public static readonly SyntaxToken Load = SyntaxFactory.Token((SyntaxKind)8485);
+    }
+}

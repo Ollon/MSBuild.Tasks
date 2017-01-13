@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectSubType>Library</ProjectSubType>
+    <TargetFrameworkProfile />
+    <PackageId>GenerateImageMonikersTask</PackageId>
+    <Description>Generates Image Moniker wrapper classes from a provided %2a.imagemanifest file</Description>
+    <Authors>Ollon, LLC</Authors>
+    <Title>GenerateImageMonikersTask</Title>
+    <Summary>Generates Image Moniker wrapper classes from a provided %2a.imagemanifest file</Summary>
+    <Owners>bmarshall</Owners>
+    <PackageProjectUrl>https://github.com/Ollon/MSBuild.Tasks</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Ollon/MSBuild.Tasks/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://go.microsoft.com/fwlink/%3flinkid=825694</PackageIconUrl>
+    <PackageVersion>1.0.0-RC</PackageVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildProjectDirectory)\..\..\Build\Targets\VSX.Settings.props" Condition="Exists('$(MSBuildProjectDirectory)\..\..\Build\Targets\VSX.Settings.props')" />
+  <PropertyGroup>
+    <ProjectGuid>{A96DFDB2-4B4D-4E26-BBDC-CAFEFBDAFA8A}</ProjectGuid>
+    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AssemblyName>MSBuild.Tasks.GenerateImageMonikers</AssemblyName>
+    <RootNamespace>MSBuild.Tasks</RootNamespace>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="build\GenerateImageMonikersTask.props" />
+    <Content Include="build\GenerateImageMonikersTask.targets" />
+    <None Include="Debug.cmd" />
+    <None Include="Debug.targets" />
+    <None Include="project.json" />
+    <None Include="Tasks\Generator\Model\ImageManifest.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Tasks\GenerateImageMonikersTask.cs" />
+    <Compile Include="Tasks\Generator\AbstractCodeGenerator.cs" />
+    <Compile Include="Tasks\Generator\CodeGenerationContext.cs" />
+    <Compile Include="Tasks\Generator\CodeGenerationResult.cs" />
+    <Compile Include="Tasks\Generator\CodeGeneratorFactory.cs" />
+    <Compile Include="Tasks\Generator\CommandTableCodeGenerator.cs" />
+    <Compile Include="Tasks\Generator\CSharpCodeGenerator.cs" />
+    <Compile Include="Tasks\Generator\ICodeGenerator.cs" />
+    <Compile Include="Tasks\Generator\Keywords.cs" />
+    <Compile Include="Tasks\Generator\Model\ImageManifest.cs">
+      <DependentUpon>ImageManifest.xsd</DependentUpon>
+      <SubType>code</SubType>
+    </Compile>
+    <Compile Include="Tasks\Generator\Modifiers.cs" />
+    <Compile Include="Tasks\Language.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="tools\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildProjectDirectory)\..\..\Build\Targets\VSX.Imports.targets" Condition="Exists('$(MSBuildProjectDirectory)\..\..\Build\Targets\VSX.Settings.props')" />
+</Project>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="15.0">
+
+  <UsingTask TaskName="GenerateImageMonikersTask" AssemblyFile="Ollon.VisualStudio.ProjectSystem.Tasks.dll" />
+
+
+  <Target Name="GenerateImageMonikers">
+    <PropertyGroup>
+      <ImageManifestFile>C:\Repos\ProjectSystem\ProjectType\ProjectType.ProjectType\ImageCatalog.imagemanifest</ImageManifestFile>
+      <IntermediateOutputPath>C:\Repos\ProjectSystem\ProjectType\ProjectType.ProjectType\obj\Debug\</IntermediateOutputPath>
+    </PropertyGroup>
+
+    <GenerateImageMonikersTask
+      ImageManifestFile="$(ImageManifestFile)"
+      TargetDirectory="$(IntermediateOutputPath)"
+      MonikerClass="ImageMonikers"
+      ImageIdClass="ImageIds">
+      <Output TaskParameter="ImageIdFile" ItemName="Compile" />
+      <Output TaskParameter="ImageIdFile" ItemName="FileWrites" />
+      <Output TaskParameter="MonikerFile" ItemName="Compile" />
+      <Output TaskParameter="MonikerFile" ItemName="FileWrites" />
+    </GenerateImageMonikersTask>
+    
+  </Target>
+  
+</Project>

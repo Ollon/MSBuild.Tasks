@@ -1,0 +1,91 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+
+    <!-- Establish Design-Time Context-->
+    <VisualStudioVersion>15.0</VisualStudioVersion>
+    <MinimumVisualStudioVersion>$(VisualStudioVersion)</MinimumVisualStudioVersion>
+
+    <!-- Get the root folder for the whole solution so we have an established point of reference -->
+    <RepositoryRootDirectory>$(MSBuildThisFileDirectory)..\..\</RepositoryRootDirectory>
+    <RepositoryRootDirectory>$([System.IO.Path]::GetFullPath('$(RepositoryRootDirectory)'))</RepositoryRootDirectory>
+
+    <!-- Set this now, in case we are building from the commandline -->
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">$(RepositoryRootDirectory)</SolutionDir>
+
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+
+    <!-- Provide Easy Access to Top-Level folder structure for convenience. -->
+    <BinariesDir>$(RepositoryRootDirectory)Binaries\</BinariesDir>
+    <ObjDir>$(BinariesDir)Obj\</ObjDir>
+    <BuildDir>$(RepositoryRootDirectory)Build\</BuildDir>
+    <TargetsDir>$(RepositoryRootDirectory)Build\Targets\</TargetsDir>
+    <StrongNameKeyDir>$(RepositoryRootDirectory)Build\Strong Name Keys\</StrongNameKeyDir>
+    <SrcDir>$(RepositoryRootDirectory)Src\</SrcDir>
+    <ToolsDir>$(RepositoryRootDirectory)Tools\</ToolsDir>
+
+    <!-- For Reference, in case you want increase design-time capabilities. -->
+    <WpfProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</WpfProjectTypeGuids>
+    <VsixProjectTypeGuids>{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</VsixProjectTypeGuids>
+    <VSPackageProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{82b43b9b-a64c-4715-b499-d71e9ca2bd60};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</VSPackageProjectTypeGuids>
+
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <HighEntropyVA>true</HighEntropyVA>
+    <FileAlignment>512</FileAlignment>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>off</GenerateSerializationAssemblies>
+
+  </PropertyGroup>
+
+  <!-- Outputs -->
+
+  <PropertyGroup>
+    <OutDir>$(BinariesDir)$(Configuration)\$(MSBuildProjectName)\</OutDir>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="'$(ProjectSubType)'=='VSTemplate'">
+      <PropertyGroup>
+        <OutDir>$(BinariesDir)Templates\</OutDir>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+  <PropertyGroup>
+    <OutputPath>$(OutDir)</OutputPath>
+    <ObjDir>$(BinariesDir)Obj\</ObjDir>
+    <IntermediateOutputPath>$(ObjDir)$(MSBuildProjectName)\</IntermediateOutputPath>
+  </PropertyGroup>
+
+  <!-- Common Default Properties -->
+  <PropertyGroup>
+    <OutputType Condition="'$(OutputType)'==''">Library</OutputType>
+    <FileAlignment Condition="'$(FileAlignment)'==''">512</FileAlignment>
+    <ErrorReport Condition="'$(ErrorReport)'==''">prompt</ErrorReport>
+    <AssemblyName Condition="'$(AssemblyName)'==''">$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace Condition="'$(RootNamespace)'==''">$(MSBuildProjectName)</RootNamespace>
+    <Deterministic Condition="'$(Deterministic)'==''">true</Deterministic>
+    <HighEntropyVA Condition="'$(HighEntropyVA)'==''">true</HighEntropyVA>
+    <WarningLevel Condition="'$(WarningLevel)'==''">4</WarningLevel>
+    <GenerateSerializationAssemblies Condition="'$(GenerateSerializationAssemblies)'==''">off</GenerateSerializationAssemblies>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' "/>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' "/>
+
+  <PropertyGroup>
+    <SignAssembly Condition="'$(SignAssembly)'==''">true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(StrongNameKeyDir)MSBuild.TasksSharedKey.snk</AssemblyOriginatorKeyFile>
+    <PublicKey>0024000004800000940000000602000000240000525341310004000001000100EF0462EBB9D38F0543B7EBB8CC4B573D614AD0A86C128B54F873E231E2E9E957290F8920958CBBCF85A82955C557F528B0C07FBF16F93B52ED850F88A9CC491383D3D9654387EAC271E95D7892A1AB442418DF8F3D36928AE2D610865C48D464710758594BFD1CEBD2C6B9A523EA2C61D348B89CC303F257CF38215D83E26F98</PublicKey>
+  </PropertyGroup>
+
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+        Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
+</Project>

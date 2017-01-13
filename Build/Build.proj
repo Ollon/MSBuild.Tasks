@@ -1,0 +1,77 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <PropertyGroup>
+    <RepositoryRootDirectory>$(MSBuildThisFileDirectory)..\</RepositoryRootDirectory>
+
+    <!-- Make note NUGET_PACKAGES is environment variable respected
+         by NuGet.exe, so don't be tempted to change the name.-->
+    <NUGET_PACKAGES Condition="'$(NUGET_PACKAGES)' == ''">$(UserProfile)\.nuget\packages</NUGET_PACKAGES>
+
+    <CommonMSBuildGlobalProperties>
+      Configuration=$(Configuration);
+    </CommonMSBuildGlobalProperties>
+    
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SolutionFile Include="$(RepositoryRootDirectory)MSBuild.Tasks.sln" />
+    <NuGetProjectFile Include="$(RepositoryRootDirectory)src\Nuget\Nuget.proj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <!-- NuGet will not automatically find the correct version of MSBuild. We need to specify the path. -->
+    <NugetArguments>-verbosity quiet -msbuildpath &quot;$(DevenvDir)\..\..\MSBuild\15.0\bin&quot;</NugetArguments>
+  </PropertyGroup>
+
+  <Target Name="RestorePackages">
+
+    <Message Text="Restoring packages for %(SolutionFile.Filename)" Importance="high" />
+
+    <Exec Command="&quot;$(RepositoryRootDirectory)NuGet.exe&quot; restore $(NugetArguments) &quot;@(SolutionFile)&quot;" />
+  </Target>
+
+  <Target Name="BuildSolution">
+
+    <Message Text="Building %(SolutionFile.Filename) [$(Configuration)]" Importance="high" />
+
+    <MSBuild BuildInParallel="true"
+             Projects="@(SolutionFile)"
+             Targets="Build"
+             Properties="$(CommonMSBuildGlobalProperties)"
+             />
+  </Target>
+
+  <Target Name="RebuildSolution">
+
+    <Message Text="Rebuilding %(SolutionFile.Filename) [$(Configuration)]" Importance="high" />
+
+    <MSBuild BuildInParallel="true"
+             Projects="@(SolutionFile)"
+             Targets="Rebuild"
+             Properties="$(CommonMSBuildGlobalProperties)"
+             />
+  </Target>
+
+  <Target Name="BuildNuGetPackages">
+
+    <MSBuild BuildInParallel="true"
+             Projects="@(NuGetProjectFile)"
+             Targets="Build"
+             Properties="$(CommonMSBuildGlobalProperties)"
+               />
+  </Target>
+
+  <Target Name="RebuildNuGetPackages">
+
+    <MSBuild BuildInParallel="true"
+             Projects="@(NuGetProjectFile)"
+             Targets="Rebuild"
+             Properties="$(CommonMSBuildGlobalProperties)"
+               />
+  </Target>
+
+
+  <Target Name="Build" DependsOnTargets="RestorePackages;BuildSolution" />
+  <Target Name="Rebuild" DependsOnTargets="RestorePackages;RebuildSolution" />
+
+</Project>

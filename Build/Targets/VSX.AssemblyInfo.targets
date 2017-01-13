@@ -1,0 +1,99 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--
+    ============================================================
+                                     GenerateAssemblyInfo
+
+    Generates assembly info source to intermediate directory
+    ============================================================
+    -->
+
+  <PropertyGroup>
+    <Company Condition="'$(Company)'==''">Ollon, LLC</Company>
+    <Copyright Condition="'$(Copyright)'==''">© 2017 Ollon, LLC. All Rights Reserved.</Copyright>
+    <Description Condition="'$(Description)'==''">$(AssemblyName)</Description>
+    <Product Condition="'$(Product)'==''">$(AssemblyName)</Product>
+
+    <AssemblyTitle Condition="'$(AssemblyTitle)'==''">$(AssemblyName)</AssemblyTitle>
+    <NetralLanguage Condition="'$(NetralLanguage)'==''">en-US</NetralLanguage>
+    
+    <AssemblyVersion Condition="'$(AssemblyVersion)'==''">2.0.0.0</AssemblyVersion>
+    <Version Condition="'$(Version)'==''">2.0.0</Version>
+    <FileVersion Condition="'$(FileVersion)'==''"></FileVersion>
+    
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <GeneratedAssemblyInfoFile Condition="'$(GeneratedAssemblyInfoFile)' ==''">$(IntermediateOutputPath)GeneratedAssemblyInfo_$(Version).cs</GeneratedAssemblyInfoFile>
+    <GenerateAssemblyInfo Condition="'$(GenerateAssemblyInfo)' == ''">true</GenerateAssemblyInfo>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(GenerateAssemblyInfo)' == 'true'">
+    <GenerateAssemblyCompanyAttribute Condition="'$(GenerateAssemblyCompanyAttribute)' == ''">true</GenerateAssemblyCompanyAttribute>
+    <GenerateAssemblyConfigurationAttribute Condition="'$(GenerateAssemblyConfigurationAttribute)' == ''">true</GenerateAssemblyConfigurationAttribute>
+    <GenerateAssemblyCopyrightAttribute Condition="'$(GenerateAssemblyCopyrightAttribute)' == ''">true</GenerateAssemblyCopyrightAttribute>
+    <GenerateAssemblyDescriptionAttribute Condition="'$(GenerateAssemblyDescriptionAttribute)' == ''">true</GenerateAssemblyDescriptionAttribute>
+    <GenerateAssemblyFileVersionAttribute Condition="'$(GenerateAssemblyFileVersionAttribute)' == ''">false</GenerateAssemblyFileVersionAttribute>
+    <GenerateAssemblyInformationalVersionAttribute Condition="'$(GenerateAssemblyInformationalVersionAttribute)' == ''">true</GenerateAssemblyInformationalVersionAttribute>
+    <GenerateAssemblyProductAttribute Condition="'$(GenerateAssemblyProductAttribute)' == ''">true</GenerateAssemblyProductAttribute>
+    <GenerateAssemblyTitleAttribute Condition="'$(GenerateAssemblyTitleAttribute)' == ''">true</GenerateAssemblyTitleAttribute>
+    <GenerateAssemblyVersionAttribute Condition="'$(GenerateAssemblyVersionAttribute)' == ''">true</GenerateAssemblyVersionAttribute>
+    <GenerateNeutralResourcesLanguageAttribute Condition="'$(GenerateNeutralResourcesLanguageAttribute)' == ''">true</GenerateNeutralResourcesLanguageAttribute>
+  </PropertyGroup>
+
+  <!-- 
+    Note that this must run before every invocation of CoreCompile to ensure that all compiler
+    runs see the generated assembly info. There is at least one scenario involving Xaml 
+    where CoreCompile is invoked without other potential hooks such as Compile or CoreBuild,
+    etc., so we hook directly on to CoreCompile. Furthermore, we  must run *after* 
+    PrepareForBuild to ensure that the intermediate directory has been created.
+   -->
+  <Target Name="GenerateAssemblyInfo"
+          BeforeTargets="CoreCompile"
+          DependsOnTargets="PrepareForBuild;CoreGenerateAssemblyInfo"
+          Condition="'$(GenerateAssemblyInfo)' == 'true'" />
+
+  <Target Name="CoreGenerateAssemblyInfo"
+          Condition="'$(Language)'=='VB' or '$(Language)'=='C#'"
+          Inputs="$(MSBuildAllProjects)"
+          Outputs="$(GeneratedAssemblyInfoFile)">
+    <ItemGroup>
+      <AssemblyAttribute Include="System.Reflection.AssemblyCompanyAttribute" Condition="'$(Company)' != '' and '$(GenerateAssemblyCompanyAttribute)' == 'true'">
+        <_Parameter1>$(Company)</_Parameter1>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Reflection.AssemblyConfigurationAttribute" Condition="'$(Configuration)' != '' and '$(GenerateAssemblyConfigurationAttribute)' == 'true'">
+        <_Parameter1>$(Configuration)</_Parameter1>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Reflection.AssemblyCopyrightAttribute" Condition="'$(Copyright)' != '' and '$(GenerateAssemblyCopyrightAttribute)' == 'true'">
+        <_Parameter1>$(Copyright)</_Parameter1>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Reflection.AssemblyDescriptionAttribute" Condition="'$(Description)' != '' and '$(GenerateAssemblyDescriptionAttribute)' == 'true'">
+        <_Parameter1>$(Description)</_Parameter1>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Reflection.AssemblyFileVersionAttribute" Condition="'$(FileVersion)' != '' and '$(GenerateAssemblyFileVersionAttribute)' == 'true'">
+        <_Parameter1>$(FileVersion)</_Parameter1>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Reflection.AssemblyInformationalVersionAttribute" Condition="'$(Version)' != '' and '$(GenerateAssemblyInformationalVersionAttribute)' == 'true'">
+        <_Parameter1>$(Version)</_Parameter1>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Reflection.AssemblyProductAttribute" Condition="'$(Product)' != '' and '$(GenerateAssemblyProductAttribute)' == 'true'">
+        <_Parameter1>$(Product)</_Parameter1>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Reflection.AssemblyTitleAttribute" Condition="'$(AssemblyTitle)' != '' and '$(GenerateAssemblyTitleAttribute)' == 'true'">
+        <_Parameter1>$(AssemblyTitle)</_Parameter1>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Reflection.AssemblyVersionAttribute" Condition="'$(AssemblyVersion)' != '' and '$(GenerateAssemblyVersionAttribute)' == 'true'">
+        <_Parameter1>$(AssemblyVersion)</_Parameter1>
+      </AssemblyAttribute>
+      <AssemblyAttribute Include="System.Resources.NeutralResourcesLanguageAttribute" Condition="'$(NeutralLanguage)' != '' and '$(GenerateNeutralResourcesLanguageAttribute)'">
+        <_Parameter1>$(NeutralLanguage)</_Parameter1>
+      </AssemblyAttribute>
+    </ItemGroup>
+    <WriteCodeFragment AssemblyAttributes="@(AssemblyAttribute)" Language="$(Language)" OutputFile="$(GeneratedAssemblyInfoFile)">
+      <Output TaskParameter="OutputFile" ItemName="Compile" />
+      <Output TaskParameter="OutputFile" ItemName="FileWrites" />
+    </WriteCodeFragment>
+  </Target>
+  
+</Project>
